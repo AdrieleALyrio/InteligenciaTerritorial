@@ -1,0 +1,81 @@
+# Relatório de Pesquisa: Fontes de Dados do ISVT
+
+Este relatório registra as fontes efetivamente utilizadas no modelo vigente do Índice Sintético de Viabilidade Territorial (ISVT), aplicado a 421 municípios prioritários da Bahia (136) e do Rio Grande do Sul (285). O modelo utiliza três dimensões e não incorpora AHP, BNDES, FNE, Airbnb ou Waze no cálculo atual.
+
+## 1. Fomento Rural (D1)
+
+- Sistema de Operações do Crédito Rural e do Proagro (SICOR), Banco Central do Brasil.
+- Arquivo operacional do projeto: Fomento_Municipal_Anual_WIDE.csv.
+- Variáveis utilizadas: vol_2016 a vol_2025.
+- Tratamento: soma do crédito rural municipal no período de 2016 a 2025, transformação ln(1+X) e normalização Min-Max intraestado.
+- Chave de integração: código IBGE municipal de sete dígitos.
+
+Fontes de referência:
+- Tabelas e microdados do Crédito Rural e do Proagro: https://www.bcb.gov.br/estabilidadefinanceira/tabelas-credito-rural-proagro
+- Dados Abertos BCB – Matriz de Dados do Crédito Rural: https://dadosabertos.bcb.gov.br/dataset/matrizdadoscreditorural
+
+## 2. Alojamento e Emprego Turístico Formal (D2)
+
+Fontes:
+- CADASTUR / Ministério do Turismo.
+- Relação Anual de Informações Sociais (RAIS) / Ministério do Trabalho e Emprego.
+
+Variáveis utilizadas:
+- Densidade de Leitos de Hospedagem.
+- Densidade de Estabelecimentos de Hospedagem.
+- Ocupações Formais.
+- Estabelecimentos Formais.
+
+Tratamento: transformação ln(1+X), normalização Min-Max intraestado e média simples dos quatro componentes.
+
+Referência de acesso ao CADASTUR:
+- Portal de Dados Abertos do Turismo: https://dados.turismo.gov.br/dataset/
+
+## 3. Governança e Conectividade (D3)
+
+Fontes:
+- Ministério do Turismo e IBGE, para informações de governança e planejamento municipal.
+- Anatel, para indicadores de conectividade.
+
+Variáveis utilizadas:
+- Conselho de Turismo.
+- Órgão de Turismo.
+- Plano Diretor.
+- Plano Municipal de Turismo.
+- Participação de Rede Móvel.
+- Participação de Rede 4G.
+- Participação de Rede 5G.
+- Densidade de Banda Larga Fixa.
+
+Tratamento: normalização Min-Max intraestado e média simples dos oito componentes.
+
+Referência de acesso:
+- Painéis de infraestrutura da Anatel: https://informacoes.anatel.gov.br/paineis/infraestrutura/cobertura-movel
+
+## 4. Identificação municipal e cartografia
+
+- Base principal: CodigoIbgeMunicipiosAlvo.csv.
+- Coordenadas municipais: municipios_coordenadas.csv.
+- Chave comum: código IBGE municipal padronizado com sete dígitos.
+- As coordenadas são usadas para representação no mapa Leaflet do dashboard.
+
+## 5. Procedimentos de integração
+
+1. Limpeza dos nomes de colunas e padronização dos códigos IBGE.
+2. Conversão segura dos valores monetários brasileiros do SICOR.
+3. Soma anual do crédito rural de 2016 a 2025.
+4. Merge entre a base principal, SICOR e coordenadas municipais.
+5. Validação de correspondência para todos os municípios.
+6. Cálculo de D1, D2, D3, ISVT, Capacidade Territorial, Gap de Fomento e quadrantes.
+7. Exportação de HTML, CSV e XLSX a partir da mesma execução.
+
+## 6. Itens excluídos do modelo vigente
+
+As seguintes fontes ou métodos pertenciam a versões exploratórias e não integram o cálculo atual:
+- Airbnb e Waze.
+- BNDES e FNE como componentes de D1.
+- AHP e ponderações 50%/40%/10%.
+- Diversidade financeira.
+- Série 2026 no acumulado de D1.
+
+O período oficial de D1 é 2016–2025, e as três dimensões recebem pesos equivalentes no ISVT final.
