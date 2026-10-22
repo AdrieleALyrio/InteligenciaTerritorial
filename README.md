@@ -83,7 +83,7 @@ Para evitar instabilidades de conexões externas e exigências de contas de fatu
 O repositório está estruturado em frentes coordenadas de trabalho:
 
 ### Engenharia de Dados (Local / VS Code)
-* `processamento_local_sicor_v6.py`: Limpa, georreferencia e unifica as bases de dados anuais do SICOR do Banco Central de 2016 a 2026, gerando o arquivo otimizado `Fomento_Municipal_Anual_WIDE.csv`.
+* `processamento_local_sicor_v6.py`: Limpa, georreferencia e unifica as bases de dados anuais do SICOR do Banco Central de 2016 a 2025, gerando o arquivo otimizado `Fomento_Municipal_Anual_WIDE.csv`.
 
 ### Modelagem, Análise e Cartografia (Google Colab / Nuvem)
 * `analise_isvt_dimensao1_revisada_v16.py`: O pipeline definitivo e blindado para a Dimensão 1. Realiza o cálculo matemático do AHP de Saaty, processa offline em blocos o CSV gigante do BNDES, remove aspas e ruídos estruturais, calcula o Índice de Fomento Final (`IF_final`), plota os mapas coropléticos integrados, exporta relatórios de estatísticas reais descritivas e salva as saídas em **PNG de alta resolução (300 DPI)** e **PDF Vetorial** para inserção imediata no Word.
